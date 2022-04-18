@@ -12,7 +12,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.model2.mvc.common.Search;
+import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.domain.Purchase;
+import com.model2.mvc.service.domain.User;
+import com.model2.mvc.service.product.ProductService;
 import com.model2.mvc.service.purchase.PurchaseService;
 
 
@@ -29,13 +32,22 @@ public class PurchaseServiceTest {
 	@Test
 	public void testAddPurchase() throws Exception {
 		
+		
+		User user = new User();
+		user.setUserId("user23");
+		
+		Product product = new Product();
+		product.setProdNo(10082);
+		
 		Purchase purchase = new Purchase();
+		
+		purchase.setBuyer(user);
+		purchase.setPurchaseProd(product);
 		purchase.setPaymentOption("1");
 		purchase.setReceiverName("문자몽");
 		purchase.setReceiverPhone("010-1111-1111");
 		purchase.setDivyAddr("서울");
 		purchase.setDivyRequest("없음");
-
 		
 		purchaseService.addPurchase(purchase);
 		
@@ -44,11 +56,13 @@ public class PurchaseServiceTest {
 		System.out.println(purchase);
 		
 		//==> API 확인
-		Assert.assertEquals("1", purchase.getPaymentOption());
+		Assert.assertEquals("user23", purchase.getBuyer().getUserId());
+		Assert.assertEquals("1", purchase.getPaymentOption().trim());
 		Assert.assertEquals("문자몽", purchase.getReceiverName());
 		Assert.assertEquals("010-1111-1111", purchase.getReceiverPhone());
 		Assert.assertEquals("서울", purchase.getDivyAddr());
 		Assert.assertEquals("없음", purchase.getDivyRequest());
+		Assert.assertEquals("21-03-23", purchase.getDivyDate());
 
 	}
 
@@ -105,6 +119,7 @@ public class PurchaseServiceTest {
 		Assert.assertEquals("서울특별시", purchase.getDivyAddr());
 		Assert.assertEquals("부재시 문앞", purchase.getDivyRequest());
 	 }
+	 
 	 
 	 
 	 /*
