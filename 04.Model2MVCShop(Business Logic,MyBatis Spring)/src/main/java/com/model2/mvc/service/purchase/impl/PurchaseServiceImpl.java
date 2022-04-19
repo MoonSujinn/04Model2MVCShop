@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.domain.Purchase;
 import com.model2.mvc.service.purchase.PurchaseDao;
 import com.model2.mvc.common.Search;
@@ -38,11 +39,10 @@ public class PurchaseServiceImpl implements PurchaseService{
 	    return purchaseDao.getPurchase(tranNo);
 	}
 
-	/*
-	@Override
-	public Map<String, Object> getPurchaseList(Search search, String userId) throws Exception {
-		List<Purchase> list= purchaseDao.getPurchaseList(search, userId);
-		int totalCount = purchaseDao.getTotalCount(userId);
+	
+	public Map<String , Object > getPurchaseList(Search search,String userId) throws Exception {
+		List<Purchase> list= purchaseDao.getPurchaseList(search,userId);
+		int totalCount = purchaseDao.getTotalCount(search);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list );
@@ -50,7 +50,6 @@ public class PurchaseServiceImpl implements PurchaseService{
 		
 		return map;
 	}
-	*/
 
 	/*
 	@Override
