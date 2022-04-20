@@ -40,7 +40,10 @@ public class PurchaseDaoImpl implements PurchaseDao{
 	
 	
 	public List<Purchase> getPurchaseList(Search search, String userId) throws Exception {
-		return sqlSession.selectList("PurchaseMapper.getPurchaseList", search);
+		Map<String,Object> map=new HashMap<String,Object>();	
+		map.put("userId", userId);
+		map.put("search", search);
+		return sqlSession.selectList("PurchaseMapper.getPurchaseList", map);
 	}
 	
 	
