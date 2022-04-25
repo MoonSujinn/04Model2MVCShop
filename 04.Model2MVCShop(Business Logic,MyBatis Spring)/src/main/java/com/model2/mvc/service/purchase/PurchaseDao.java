@@ -26,7 +26,7 @@ public interface PurchaseDao {
    //public Map<String , Object> getSaleList(Search search) throws Exception;
 		
 
-   public int getTotalCount(Search search) throws Exception ;
+   public int getTotalCount(String userId) throws Exception ;
 		
  
    //private String makeCurrentPageSql(String sql , Search search);

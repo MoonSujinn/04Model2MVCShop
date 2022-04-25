@@ -42,7 +42,7 @@ public class PurchaseServiceImpl implements PurchaseService{
 	
 	public Map<String , Object > getPurchaseList(Search search,String userId) throws Exception {
 		List<Purchase> list= purchaseDao.getPurchaseList(search,userId);
-		int totalCount = purchaseDao.getTotalCount(search);
+		int totalCount = purchaseDao.getTotalCount(userId);
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("list", list );

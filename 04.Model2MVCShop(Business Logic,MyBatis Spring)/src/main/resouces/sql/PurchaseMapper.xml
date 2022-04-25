@@ -78,13 +78,13 @@
     <update   id="updateTranCode"   parameterType="purchase" >
          UPDATE transaction
          <set>
-         tran_status_code   = #{tranCode:CHAR}
+         tran_status_code = #{tranCode:CHAR}
          </set>
          WHERE prod_no = #{purchaseProd.prodNo}
     </update>
     
     
-	<select  id="getPurchaseList"  parameterType="search"	resultMap="productSelectMap">
+	<select  id="getPurchaseList"  parameterType="search"	resultMap="purchaseSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
 	  					FROM		(	SELECT tran_no, buyer_id, receiver_name,receiver_phone,tran_status_code
@@ -95,8 +95,8 @@
 												</where>
 											</if>
 											ORDER BY tran_no ) inner_table
-						WHERE ROWNUM &lt;= #{endRowNum} )
-		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
+						WHERE ROWNUM &lt;= #{search.endRowNum} )
+		WHERE row_seq BETWEEN #{search.startRowNum} AND #{search.endRowNum} 
 	 </select>
 	 
 	<!-- SQL : SELECT ROW Count -->	 
